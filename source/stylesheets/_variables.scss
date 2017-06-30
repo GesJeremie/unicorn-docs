@@ -23,20 +23,20 @@ under the License.
 
 // BACKGROUND COLORS
 ////////////////////
-$nav-bg: #393939 !default;
-$examples-bg: #393939 !default;
-$code-bg: #292929 !default;
-$code-annotation-bg: #1c1c1c !default;
-$nav-subitem-bg: #262626 !default;
-$nav-active-bg: #2467af !default;
+$nav-bg: #292548 !default;
+$examples-bg: #373352 !default;
+$code-bg: #292548 !default;
+$code-annotation-bg: transparent !default;
+$nav-subitem-bg: lighten(#292548, 10%) !default;
+$nav-active-bg: #8063BB !default;
 $lang-select-border: #000 !default;
-$lang-select-bg: #222 !default;
+$lang-select-bg: #141223 !default;
 $lang-select-active-bg: $examples-bg !default; // feel free to change this to blue or something
 $lang-select-pressed-bg: #111 !default; // color of language tab bg when mouse is pressed
-$main-bg: #eaf2f6 !default;
-$aside-notice-bg: #44BBFF !default;
-$aside-warning-bg: #FC575E !default;
-$aside-success-bg: #27AE60 !default;
+$main-bg: white !default;
+$aside-notice-bg: #8870FF !default;
+$aside-warning-bg: #D8335B !default;
+$aside-success-bg: #2CC990 !default;
 $search-notice-bg: #c97a7e !default;
 
 
@@ -68,8 +68,9 @@ $phone-width: $tablet-width - $nav-width !default; // min width before reverting
 // FONTS
 ////////////////////
 %default-font {
-  font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei","微软雅黑", STXihei, "华文细黑", sans-serif;
-  font-size: 13px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
 }
 
 %header-font {

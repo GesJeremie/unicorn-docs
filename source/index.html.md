@@ -2,19 +2,14 @@
 title: API Reference
 
 language_tabs:
-  - shell
-  - ruby
-  - python
-  - javascript
+  - Curl
 
 toc_footers:
-  - <a href='#'>Sign Up for an awesome developer key</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
   - errors
 
-search: true
+search: false
 ---
 
 # Introduction
@@ -47,7 +42,9 @@ Kittn expects for the API key to be included in all API requests to the server i
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
 
-# Kittens
+# Servers
+
+## Get a Specific Server
 
 ## Get All Kittens
 
@@ -102,7 +99,7 @@ This endpoint retrieves all kittens.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET http://api.unicornfm.com/v1/servers`
 
 ### Query Parameters
 

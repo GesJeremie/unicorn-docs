@@ -1,4 +1,5 @@
 @charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i');
 @import 'normalize';
 @import 'variables';
 @import 'icon-font';
@@ -24,7 +25,7 @@ under the License.
 ////////////////////////////////////////////////////////////////////////////////
 
 html, body {
-  color: $main-text;
+  color: #464a5c;
   padding: 0;
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -47,12 +48,14 @@ html, body {
 }
 
 @mixin embossed-bg {
+  /*
   background:
     linear-gradient(to bottom, rgba(#000, 0.2), rgba(#000, 0) 8px),
     linear-gradient(to top, rgba(#000, 0.2), rgba(#000, 0) 8px),
     linear-gradient(to bottom, rgba($nav-embossed-border-top, 1), rgba($nav-embossed-border-top, 0) 1.5px),
     linear-gradient(to top, rgba($nav-embossed-border-bottom, 1), rgba($nav-embossed-border-bottom, 0) 1.5px),
     $nav-subitem-bg;
+  */
 }
 
 .tocify-wrapper {
@@ -81,7 +84,7 @@ html, body {
 
   // This is the logo at the top of the ToC
   &>img {
-    display: block;
+    display: none;
     max-width: 100%;
   }
 
@@ -128,7 +131,7 @@ html, body {
       margin-bottom: 1em;
     }
 
-    @include embossed-bg;
+    @embossed-bg;
 
     li {
       margin: 1em $nav-padding;
@@ -285,6 +288,10 @@ html, body {
     z-index: 50;
     border-bottom: 5px solid $lang-select-active-bg;
   }
+
+  a {
+    color: #8870FF;
+  }
 }
 
 .lang-selector {
@@ -358,11 +365,13 @@ html, body {
     font-size: 30px;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #EDEEF5;
+    border-bottom: 1px solid #EDEEF5;
     margin-bottom: $h1-margin-bottom;
     margin-top: 2em;
-    border-top: 1px solid #ddd;
-    background-image: linear-gradient(to bottom, #fff, #f9f9f9);
+    font-weight: 500;
+    color: #373352;
+    letter-spacing: -1px;
   }
 
   h1:first-child, div:first-child + h1 {
@@ -486,10 +495,6 @@ html, body {
       background-color: $aside-success-bg;
       text-shadow: 0 1px 0 lighten($aside-success-bg, 15%);
     }
-
-    code {
-      font-weight: bold;
-    }
   }
 
   aside:before {
@@ -559,10 +564,9 @@ html, body {
     &>p {
       background-color: $code-annotation-bg;
       border-radius: 5px;
-      padding: $code-annotation-padding;
+      padding: $code-annotation-padding 0;
       color: #ccc;
-      border-top: 1px solid #000;
-      border-bottom: 1px solid #404040;
+      color: white;
     }
   }
 }
