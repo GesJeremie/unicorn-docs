@@ -475,6 +475,7 @@ html, body {
     margin-bottom: 1.5em;
     background: $aside-notice-bg;
     line-height: 1.6;
+    color: white;
 
     &.warning {
       background-color: $aside-warning-bg;
@@ -484,6 +485,10 @@ html, body {
     &.success {
       background-color: $aside-success-bg;
       text-shadow: 0 1px 0 lighten($aside-success-bg, 15%);
+    }
+
+    code {
+      font-weight: bold;
     }
   }
 
