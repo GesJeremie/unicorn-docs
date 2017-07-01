@@ -438,7 +438,7 @@ html, body {
     }
 
     tr:nth-child(even)>td {
-      background-color: lighten($main-bg,2.4%);
+      background-color: #F6F7FC;
     }
   }
 
@@ -629,4 +629,17 @@ html, body {
 
 .highlight, .highlight .w {
   background-color: $code-bg;
+}
+
+.highlight.json {
+  .err {
+    color: white;
+  }
+}
+
+.type {
+  display: block;
+}
+.type code {
+  font-size: 10px;
 }
