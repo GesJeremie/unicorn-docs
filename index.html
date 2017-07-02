@@ -219,27 +219,36 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="introduction">Introduction</h1>
+        
+          <h1 id="introduction">Introduction</h1>
 
 <aside class="warning">
-Unicornfm isn&rsquo;t released yet and is currently in development. If you see that, it means you are a fucking-very early user and you should be proud.
+Unicornfm isn&rsquo;t released yet and is currently in development. If you see that, it means you are a fucking-very early user and you should be proud (and almost nothing listed here will work :p.)
 </aside>
 
 <p>Welcome to the UnicornFM API documentation!</p>
 
-<p>This API is used by our app (<a href="http://www.unicornfm.com">unicornfm.com</a>) which means you could be able to create your very own Unicorn App or whatever you could think of, we are very excited to see what you gonna build with it!</p>
+<p>This API is the core of UnicornFM, think of <a href="http://www.unicornfm.com">unicornfm.com</a> like a fancy UI wrapper around it. It means you could be able to create your own unicorn app or whatever you could think of, we we are very excited to see what you gonna build with it!</p>
 
-<h1 id="api-format">API Format</h1>
+<aside class="notice">
+  Note - We would love to see a Slack / Messenger bot to push songs &hellip;<br/>
+</aside>
 
-<p>We use http://jsonapi.org/format/.</p>
-
-<h1 id="authentification">Authentification</h1>
+          <h1 id="authentification">Authentification</h1>
 
 <p>Our API is public, anyone is allowed to access our API, you don&rsquo;t even have to register for an API key, just start to code right away.</p>
+
+<p>CORS is allowed on the API and the Socket :)</p>
 
 <aside class="success">
   Remember - Don&rsquo;t be a dick.
 </aside>
+
+          <h1 id="api-format">API Format</h1>
+
+<p>This API is based on the specification of <a href="http://jsonapi.org/format/">http://jsonapi.org/format</a>. This is a well-known standard and have multiple implementations in different languages/frameworks: <a href="http://jsonapi.org/implementations">http://jsonapi.org/implementations</a>.</p>
+
+<p>The base API endpoint is <code class="prettyprint">http://api.unicornfm.com/v1</code>.</p>
 
           <h1 id="users">Users</h1>
 
@@ -250,8 +259,17 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
   Most of the endpoints of the API will ask for an user token.
 </aside>
 
-<h2 id="the-user-object">The User Object</h2>
-
+          <h2 id="the-user-object">The User Object</h2>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+  </span><span class="err">id</span><span class="p">:</span><span class="w"> </span><span class="s2">"f066d4ef-c332-4d2b-a793-65aa88768e55"</span><span class="p">,</span><span class="w">
+  </span><span class="err">attributes</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">token</span><span class="p">:</span><span class="w"> </span><span class="s2">"5976423a-ee35-11e3-8569-14109ff1a304"</span><span class="p">,</span><span class="w">
+    </span><span class="err">inserted-at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="p">,</span><span class="w">
+    </span><span class="err">updated-at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <h3 id="attributes">Attributes</h3>
 
 <table><thead>
@@ -265,15 +283,11 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
 <td>Auto generated token which will be often asked as a required parameter by other endpoints</td>
 </tr>
 <tr>
-<td>role <span class="type"><code class="prettyprint">String</code></span></td>
-<td>The role of the user, currently the only available role is:<br/> <code class="prettyprint">anonymous</code></td>
-</tr>
-<tr>
-<td>inserted_date <span class="type"><code class="prettyprint">Timestamp</code></span></td>
+<td>inserted-date <span class="type"><code class="prettyprint">Timestamp</code></span></td>
 <td>Time at which the user was created</td>
 </tr>
 <tr>
-<td>updated_date <span class="type"><code class="prettyprint">Timestamp</code></span></td>
+<td>updated-date <span class="type"><code class="prettyprint">Timestamp</code></span></td>
 <td>Time at which the user was updated</td>
 </tr>
 </tbody></table>
@@ -282,7 +296,7 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
   The token is returned only at the creation of the user.
 </aside>
 
-<h2 id="create-an-user">Create an User</h2>
+          <h2 id="create-a-user">Create a User</h2>
 <pre class="highlight shell tab-shell"><code>curl --request POST http://api.unicornfm.com/v1/users
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'store'</span><span class="p">).</span><span class="nx">createRecord</span><span class="p">(</span><span class="s1">'user'</span><span class="p">).</span><span class="nx">save</span><span class="p">()</span>
 </code></pre>
@@ -296,10 +310,9 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
   </span><span class="err">data</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
-      </span><span class="err">id</span><span class="p">:</span><span class="w"> </span><span class="s2">"193"</span><span class="p">,</span><span class="w">
+      </span><span class="err">id</span><span class="p">:</span><span class="w"> </span><span class="s2">"f066d4ef-c332-4d2b-a793-65aa88768e55"</span><span class="p">,</span><span class="w">
       </span><span class="err">attributes</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="err">token</span><span class="p">:</span><span class="w"> </span><span class="s2">"5976423a-ee35-11e3-8569-14109ff1a304"</span><span class="p">,</span><span class="w">
-        </span><span class="err">role</span><span class="p">:</span><span class="w"> </span><span class="s2">"anonymous"</span><span class="p">,</span><span class="w">
         </span><span class="err">inserted_at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="p">,</span><span class="w">
         </span><span class="err">updated_at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -309,12 +322,68 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
 </span></code></pre>
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST http://api.unicornfm.com/v1/users</code></p>
+<aside class="http">
+  POST http://api.unicornfm.com/v1/users
+</aside>
+
+          <h2 id="retrieve-a-user">Retrieve a User</h2>
+<pre class="highlight shell tab-shell"><code>curl http://api.unicornfm.com/users/f066d4ef-c332-4d2b-a793-65aa88768e55
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'store'</span><span class="p">).</span><span class="nx">findRecord</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="s1">'f066d4ef-c332-4d2b-a793-65aa88768e55'</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="err">jsonapi</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">version</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="err">data</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+      </span><span class="err">id</span><span class="p">:</span><span class="w"> </span><span class="s2">"f066d4ef-c332-4d2b-a793-65aa88768e55"</span><span class="p">,</span><span class="w">
+      </span><span class="err">attributes</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">inserted_at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="p">,</span><span class="w">
+        </span><span class="err">updated_at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="http">
+  GET http://api.unicornfm.com/v1/users/:id
+</aside>
+
+<h3 id="segment-parameters">Segment Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The id of the user to retrieve</td>
+</tr>
+</tbody></table>
 
           <h1 id="servers">Servers</h1>
 
-<h2 id="the-server-object">The Server Object</h2>
+<p>Servers are the entity we like to call <strong>&ldquo;unicorns&rdquo;</strong>. Users can create/join them and push tracks to them, it&rsquo;s definitely the core concept of Unicorn. </p>
 
+          <h2 id="the-server-object">The Server Object</h2>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="s2">"server"</span><span class="p">,</span><span class="w">
+  </span><span class="err">id</span><span class="p">:</span><span class="w"> </span><span class="s2">"69b2d5af-ff4d-4c85-843f-cdf1dcec4241"</span><span class="p">,</span><span class="w">
+  </span><span class="err">attributes</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="s2">"idiot-parrot-686"</span><span class="p">,</span><span class="w">
+    </span><span class="err">user-id</span><span class="p">:</span><span class="w"> </span><span class="s2">"86ef8527-144b-4756-b5da-aa1faadff5ad"</span><span class="p">,</span><span class="w">
+    </span><span class="err">current-track</span><span class="p">:</span><span class="w"> </span><span class="s2">"03afecc8-4fb4-4c91-a041-e053f77def86"</span><span class="w">
+    </span><span class="err">inserted-at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="p">,</span><span class="w">
+    </span><span class="err">updated-at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <h3 id="attributes">Attributes</h3>
 
 <table><thead>
@@ -328,16 +397,12 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
 <td>The name of the server</td>
 </tr>
 <tr>
-<td>user-id <span class="type"><code class="prettyprint">Integer</code></span></td>
+<td>user-id <span class="type"><code class="prettyprint">String</code></span></td>
 <td>The owner of the server</td>
 </tr>
 <tr>
-<td>push-type <span class="type"><code class="prettyprint">String</code></span></td>
-<td>When a track is pushed to the server should it played instantly <code class="prettyprint">[instant]</code> or added to the current playlist <code class="prettyprint">[playlist]</code></td>
-</tr>
-<tr>
-<td>online <span class="type"><code class="prettyprint">Boolean</code></span></td>
-<td>Flag to know if the server is currently listening events (socket opened)</td>
+<td>current-track <span class="type"><code class="prettyprint">String</code></span></td>
+<td>The track currently played on the unicorn</td>
 </tr>
 <tr>
 <td>inserted-date <span class="type"><code class="prettyprint">Timestamp</code></span></td>
@@ -349,7 +414,7 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
 </tr>
 </tbody></table>
 
-<h2 id="create-a-server">Create a Server</h2>
+          <h2 id="create-a-server">Create a Server</h2>
 <pre class="highlight shell tab-shell"><code>curl http://api.unicornfm.com/v1/servers <span class="se">\</span>
   -d <span class="s1">'{"server":{"user_token":"5976423a-ee35-11e3-8569-14109ff1a304"}}'</span> 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'store'</span><span class="p">).</span><span class="nx">create</span><span class="p">(</span><span class="s1">'server'</span><span class="p">,</span> <span class="p">{</span>
@@ -366,14 +431,13 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
   </span><span class="err">data</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="s2">"server"</span><span class="p">,</span><span class="w">
-      </span><span class="err">id</span><span class="p">:</span><span class="w"> </span><span class="s2">"idiot-parrot-678"</span><span class="p">,</span><span class="w">
+      </span><span class="err">id</span><span class="p">:</span><span class="w"> </span><span class="s2">"740d712c-de24-4131-8ae4-b674a320e228"</span><span class="p">,</span><span class="w">
       </span><span class="err">attributes</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="s2">"idiot-parrot-678"</span><span class="p">,</span><span class="w">
-        </span><span class="err">user-id</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
-        </span><span class="err">push-type</span><span class="p">:</span><span class="w"> </span><span class="s2">"instant"</span><span class="p">,</span><span class="w">
-        </span><span class="err">online</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="err">user-id</span><span class="p">:</span><span class="w"> </span><span class="s2">"af3c79c7-8300-4c9f-8e02-ed0257a2ab12"</span><span class="p">,</span><span class="w">
+        </span><span class="err">current-track</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="err">inserted-at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="p">,</span><span class="w">
-        </span><span class="err">updated-at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="w">
+        </span><span class="err">updated-at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:41:38.987925"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">  
@@ -381,7 +445,9 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
 </span></code></pre>
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST http://api.unicornfm.com/v1/servers</code></p>
+<aside class="http">
+  POST http://api.unicornfm.com/v1/servers
+</aside>
 
 <h3 id="data-parameters">Data Parameters</h3>
 
@@ -392,13 +458,62 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
 </tr>
 </thead><tbody>
 <tr>
-<td>user_token</td>
+<td>user-token <span class="type required"><code class="prettyprint">Required</code></span></td>
 <td>The token of the user</td>
+</tr>
+<tr>
+<td>name <span class="type"><code class="prettyprint">Optional</code></span></td>
+<td>The name to give to the server. If not provided, we auto generate one. Be aware we suglify the input which allow only <strong>alpha-numeric characters</strong> and <strong>dashes</strong>. Keep in mind we only accept <strong>unique names</strong>.</td>
 </tr>
 </tbody></table>
 
-<h2 id="get-a-specific-server">Get a Specific Server</h2>
+          <h2 id="update-a-server">Update a Server</h2>
+<pre class="highlight javascript tab-javascript"><code><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'store'</span><span class="p">).</span><span class="nx">findRecord</span><span class="p">(</span><span class="s1">'server'</span><span class="p">,</span> <span class="s1">'13cdd8b1-f3d4-449c-ab61-ff78fed187cb'</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">server</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Required</span>
+  <span class="nx">server</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'user-token'</span><span class="p">,</span> <span class="s1">'ad0700ce-b579-40eb-8201-c502611dc9e0'</span><span class="p">);</span>
+
+  <span class="c1">// Optional</span>
+  <span class="nx">server</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'beautiful-unicorn'</span><span class="p">);</span>
+  <span class="nx">server</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'user-id'</span><span class="p">,</span> <span class="s1">'bfe48bff-f6ed-4091-a876-a36b7d9a146a'</span><span class="p">);</span>
+  <span class="nx">server</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'current-track'</span><span class="p">,</span> <span class="s1">'da306b85-2247-44c3-aba0-bd4871482672'</span><span class="p">);</span>
+  <span class="nx">server</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span> 
+<span class="p">});</span>
+</code></pre>
+<h3 id="http-request">HTTP Request</h3>
+
+<aside class="http">
+  PATCH http://api.unicornfm.com/v1/servers/:id
+</aside>
+
+<h3 id="data-parameters">Data Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user-token <span class="type required"><code class="prettyprint">Required</code></span></td>
+<td>The token of the owner (current user id). If the token provided doesn&rsquo;t match the token of the server&rsquo;s user-id, the API will reject your call.</td>
+</tr>
+<tr>
+<td>name <span class="type"><code class="prettyprint">Optional</code></span></td>
+<td>The name of the server. Be aware we suglify the input which allow only <strong>alpha-numeric characters</strong> and <strong>dashes</strong>. If the name provided is <strong>not unique</strong>, the API will <strong>reject</strong> the call.</td>
+</tr>
+<tr>
+<td>user-id <span class="type"><code class="prettyprint">Optional</code></span></td>
+<td>The owner of the server. If the user-id doesn&rsquo;t exist, the API will <strong>reject</strong> the call.</td>
+</tr>
+<tr>
+<td>current-track <span class="type"><code class="prettyprint">Optional</code></span></td>
+<td>Current track playing on the server. If the track doesn&rsquo;t exist, the API will <strong>reject</strong> the call.</td>
+</tr>
+</tbody></table>
+
+          <h2 id="retrieve-a-server">Retrieve a Server</h2>
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://api.unicornfm.com/v1/server/idiot-parrot-678"</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'store'</span><span class="p">).</span><span class="nx">findRecord</span><span class="p">(</span><span class="s1">'server'</span><span class="p">,</span> <span class="s1">'idiot-parrot-678'</span><span class="p">);</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -414,8 +529,7 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
       </span><span class="err">attributes</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="s2">"idiot-parrot-678"</span><span class="p">,</span><span class="w">
         </span><span class="err">user-id</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
-        </span><span class="err">push-type</span><span class="p">:</span><span class="w"> </span><span class="s2">"instant"</span><span class="p">,</span><span class="w">
-        </span><span class="err">online</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="err">current-track</span><span class="p">:</span><span class="w"> </span><span class="mi">130</span><span class="p">,</span><span class="w">
         </span><span class="err">inserted-at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="p">,</span><span class="w">
         </span><span class="err">updated-at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -427,7 +541,9 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://api.unicornfm.com/v1/server/:id</code></p>
+<aside class="http">
+  GET http://api.unicornfm.com/v1/server/:id
+</aside>
 
 <h3 id="segment-parameters">Segment Parameters</h3>
 
@@ -443,43 +559,15 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
 </tr>
 </tbody></table>
 
-<h3 id="return-attributes">Return Attributes</h3>
-
-<table><thead>
-<tr>
-<th>Attributes</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>The name of the server</td>
-</tr>
-<tr>
-<td>push_type</td>
-<td>When a track is pushed to the server, should it played instantly <code class="prettyprint">[instant]</code> or added to the current playlist <code class="prettyprint">[playlist]</code></td>
-</tr>
-<tr>
-<td>inserted_date</td>
-<td>Timestamp when the server was created</td>
-</tr>
-<tr>
-<td>updated_date</td>
-<td>Timestamp when the server was updated</td>
-</tr>
-</tbody></table>
-
           <h1 id="songs">Songs</h1>
 
-<p>We don&rsquo;t store any physical songs on our servers, in fact we retrieve our songs from Youtube. Think of <strong>songs</strong> like a wrapper of the youtube API.</p>
+<p>We don&rsquo;t store any physical songs on our servers, in fact we retrieve our songs from Youtube. Think of <strong>songs</strong> like a wrapper of the youtube API with digest results.</p>
 
 <aside class="notice">
   We are thinking to use multiple providers in the future such as VIMEO and Soundcloud.
 </aside>
 
-<p>API with digest results.</p>
-
-<h2 id="the-song-object">The Song Object</h2>
+          <h2 id="the-song-object">The Song Object</h2>
 
 <h3 id="attributes">Attributes</h3>
 
@@ -498,8 +586,12 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
 <td>Thumbnail url</td>
 </tr>
 <tr>
-<td>duration <span class="type"><code class="prettyprint">String</code></span></td>
+<td>duration <span class="type"><code class="prettyprint">Integer</code></span></td>
 <td>The total duration of the song in seconds</td>
+</tr>
+<tr>
+<td>code <span class="type"><code class="prettyprint">String</code></span></td>
+<td>The reference id of the song of the provider</td>
 </tr>
 <tr>
 <td>provider <span class="type"><code class="prettyprint">String</code></span></td>
@@ -515,7 +607,7 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
 </tr>
 </tbody></table>
 
-<h2 id="search-songs">Search songs</h2>
+          <h2 id="search-songs">Search songs</h2>
 <pre class="highlight shell tab-shell"><code>curl http://api.unicornfm.com/songs?query<span class="o">=</span>haezer+minted
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'store'</span><span class="p">).</span><span class="nx">query</span><span class="p">(</span><span class="s1">'songs'</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">query</span><span class="p">:</span> <span class="s1">'Haezer - Minted'</span>
@@ -535,7 +627,8 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
       </span><span class="err">attributes</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="err">title</span><span class="p">:</span><span class="w"> </span><span class="s2">"HAEZER - Minted (Official Video) "</span><span class="p">,</span><span class="w">
         </span><span class="err">thumbnail</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://i.ytimg.com/vi/e-NJjN2UWVs/hqdefault.jpg"</span><span class="p">,</span><span class="w">
-        </span><span class="err">duration</span><span class="p">:</span><span class="w"> </span><span class="s2">"246"</span><span class="p">,</span><span class="w">
+        </span><span class="err">duration</span><span class="p">:</span><span class="w"> </span><span class="mi">246</span><span class="p">,</span><span class="w">
+        </span><span class="err">code</span><span class="p">:</span><span class="w"> </span><span class="s2">"JdBZJVmQz-c"</span><span class="p">,</span><span class="w">
         </span><span class="err">provider</span><span class="p">:</span><span class="w"> </span><span class="s2">"youtube"</span><span class="p">,</span><span class="w">
         </span><span class="err">inserted-at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="p">,</span><span class="w">
         </span><span class="err">updated-at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="w">
@@ -546,7 +639,9 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
 </span></code></pre>
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://api.unicornfm.com/v1/songs</code></p>
+<aside class="http">
+  GET http://api.unicornfm.com/v1/songs
+</aside>
 
 <h3 id="data-parameters">Data Parameters</h3>
 
@@ -563,6 +658,50 @@ Thus we are able to know who is the owner of a server, who pushed a song, etc.</
 <tr>
 <td>youtube_api_key <span class="type"><code class="prettyprint">optional</code></span></td>
 <td>If we don&rsquo;t have in cache the results for the search given we hit the youtube API with our API key. If you are <strong>not a dick</strong> you will provide <a href="https://developers.google.com/youtube/registering_an_application">your api key</a>.</td>
+</tr>
+</tbody></table>
+
+          <h2 id="get-a-specific-song">Get a specific song</h2>
+<pre class="highlight shell tab-shell"><code>curl http://api.unicornfm.com/songs/25
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'store'</span><span class="p">).</span><span class="nx">findRecord</span><span class="p">(</span><span class="s1">'song'</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="err">jsonapi</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">version</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="err">data</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="s2">"song"</span><span class="p">,</span><span class="w">
+      </span><span class="err">id</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+      </span><span class="err">attributes</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">title</span><span class="p">:</span><span class="w"> </span><span class="s2">"HAEZER - Minted (Official Video) "</span><span class="p">,</span><span class="w">
+        </span><span class="err">thumbnail</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://i.ytimg.com/vi/e-NJjN2UWVs/hqdefault.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="err">duration</span><span class="p">:</span><span class="w"> </span><span class="mi">246</span><span class="p">,</span><span class="w">
+        </span><span class="err">code</span><span class="p">:</span><span class="w"> </span><span class="s2">"JdBZJVmQz-c"</span><span class="p">,</span><span class="w">
+        </span><span class="err">provider</span><span class="p">:</span><span class="w"> </span><span class="s2">"youtube"</span><span class="p">,</span><span class="w">
+        </span><span class="err">inserted-at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="p">,</span><span class="w">
+        </span><span class="err">updated-at</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-27 20:21:38.987925"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://api.unicornfm.com/v1/songs/:id</code></p>
+
+<h3 id="segment-parameters">Segment Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The id of the song to retireve</td>
 </tr>
 </tbody></table>
 
