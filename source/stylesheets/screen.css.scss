@@ -188,8 +188,6 @@ html, body {
       font-size: 12px;
     }
 
-    // for embossed look:
-    @include embossed-bg;
     &>li:last-child {
       box-shadow: none; // otherwise it'll overflow out of the subheader
     }
@@ -299,9 +297,12 @@ html, body {
     float:left;
     color: $lang-select-text;
     text-decoration: none;
-    padding: 0 10px;
+    padding: 0 20px;
     line-height: 30px;
     outline: 0;
+    font-weight: 400;
+    text-transform: lowercase;
+    
 
     &:active, &:focus {
       background-color: $lang-select-pressed-bg;
@@ -631,6 +632,10 @@ html, body {
   background-color: $code-bg;
 }
 
+.highlight .k, .highlight .kv {
+  color: orange;
+}
+
 .highlight.json {
   .err {
     color: white;
@@ -639,7 +644,25 @@ html, body {
 
 .type {
   display: block;
+  
+  code {
+    text-shadow: none;
+    font-size: 10px;
+  }
+
+  &.required code {
+    color: white;
+    background-color: #D33257;
+  }
 }
-.type code {
-  font-size: 10px;
+
+.content .http {
+  display: block;
+  background: #edeef5;
+  padding: 13px 28px 14px 28px;
+  text-shadow: none;
+  border: none;
+  border: none;
+  color: #464a5c;
+  font-size: 16px;
 }
