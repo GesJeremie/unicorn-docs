@@ -2,7 +2,7 @@
 ## Retrieve a User
 
 ```shell
-curl http://api.unicornfm.com/users/f066d4ef-c332-4d2b-a793-65aa88768e55
+curl http://api.unicornfm.com/users/v1/f066d4ef-c332-4d2b-a793-65aa88768e55
 ```
 
 ```javascript
